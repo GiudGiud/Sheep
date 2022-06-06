@@ -26,4 +26,7 @@ protected:
 
   /// The diffusion coefficient
   ADMaterialProperty<Real> & _k;
+
+  /// Gradient of the variable dependency
+  const ADVariableGradient & _grad_u;
 };

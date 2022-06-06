@@ -15,7 +15,7 @@ InputParameters
 LaplaceYoungSource::validParams()
 {
   auto params = ADKernelValue::validParams();
-  params.addClassDescription("Source/sink  for the Laplace Young equation");
+  params.addClassDescription("Source/sink for the Laplace Young equation");
   params.addParam<Real>("kappa", 1, "Coefficient for the source term in the LY equation");
   return params;
 }
