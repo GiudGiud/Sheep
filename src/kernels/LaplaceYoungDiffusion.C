@@ -16,14 +16,19 @@ LaplaceYoungDiffusion::validParams()
 {
   auto params = ADKernelGrad::validParams();
   params.addClassDescription("Diffusion for the Laplace Young equation");
+  params.addRequiredParam<MaterialPropertyName>("diffusivity", "Diffusion coefficient");
+
   return params;
 }
 
-LaplaceYoungDiffusion::LaplaceYoungDiffusion(const InputParameters & parameters) : ADKernelGrad(parameters) {}
+LaplaceYoungDiffusion::LaplaceYoungDiffusion(const InputParameters & parameters) :
+  ADKernelGrad(parameters),
+  _k(getADMaterialProperty<Real>("diffusivity"))
+{}
 
 ADRealVectorValue
 LaplaceYoungDiffusion::precomputeQpResidual()
 {
-  const ADReal k = 1 / std::sqrt(1 + _grad_u[_qp] * _grad_u[_qp]);
-  return k * _grad_u[_qp];
+  // const ADReal k = 1 / std::sqrt(1 + _grad_u[_qp] * _grad_u[_qp]);
+  return _k[_qp] * _grad_u[_qp];
 }

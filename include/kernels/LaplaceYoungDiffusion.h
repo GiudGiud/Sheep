@@ -20,4 +20,7 @@ public:
 
 protected:
   virtual ADRealVectorValue precomputeQpResidual() override;
+
+  /// Diffusion coefficient as a material property
+  const ADMaterialProperty<Real> & _k;
 };
