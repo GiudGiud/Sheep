@@ -20,6 +20,7 @@ sigma = 0.2
   [diffusion]
     type = LaplaceYoungDiffusion
     variable = u
+    diffusivity = k
   []
   [source]
     type = LaplaceYoungSource
@@ -30,10 +31,17 @@ sigma = 0.2
 
 [BCs]
   [all]
-    type = NeumannBC
+    type = ADNeumannBC
     variable = u
     value = ${sigma}
     boundary = 'top bottom left right'
+  []
+[]
+
+[Materials]
+  [diff]
+    type = LaplaceYoungDiffusionCoef
+    variable = u
   []
 []
 
